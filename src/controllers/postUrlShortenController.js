@@ -1,6 +1,6 @@
 import { connectionDB } from "../database/db.js";
 
-export default async function urlShortenController(req, res) {
+export default async function postUrlShortenController(req, res) {
     try {
         const { user_id, url, short_url, visited} = req.shortled;
 

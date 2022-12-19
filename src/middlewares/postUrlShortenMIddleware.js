@@ -1,8 +1,8 @@
-import { urlShortenSchema } from "../models/urlShortenSchema.js";
+import { postUrlShortenSchema } from "../models/postUrlShortenSchema.js";
 import { nanoid } from "nanoid";
 import { connectionDB } from "../database/db.js";
 
-export default async function urlShortenMiddleware(req, res, next) {
+export default async function postUrlShortenMiddleware(req, res, next) {
   try {
     const header = req.headers.authorization;
     const body = req.body;
@@ -12,7 +12,7 @@ export default async function urlShortenMiddleware(req, res, next) {
       return res.sendStatus(401);
     }
 
-    const { url } = await urlShortenSchema.validateAsync(body, {
+    const { url } = await postUrlShortenSchema.validateAsync(body, {
       abortEarly: false,
     });
 
