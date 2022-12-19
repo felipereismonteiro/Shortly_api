@@ -1,5 +1,6 @@
 import { signUpSchema } from "../models/signUpSchema.js";
 import { connectionDB } from "../database/db.js";
+import { hashSync } from "bcrypt";
 
 export default async function signUpMiddleware(req, res, next) {
   try {
@@ -16,8 +17,10 @@ export default async function signUpMiddleware(req, res, next) {
     if (users.rows.length !== 0 || (body.password !== body.confirmPassword)) {
       return res.sendStatus(409);
     }
+    
+    const sync = hashSync(validate.password, 10);
 
-    req.user = validate;
+    req.user = {...validate, password: sync};
     next();
   } catch (err) {
     console.log(err);
