@@ -8,6 +8,7 @@ import { getUrlShortenRoute } from "./routes/getUrlShortenRoute.js";
 import { openShortUrl } from "./routes/openShortUrlRoute.js";
 import { deleteShortUrlRoute } from "./routes/deleteShortUrlRoute.js";
 import { getUsersMeRoute } from "./routes/getUsersMeRoute.js";
+import { getRankingRoute } from "./routes/getRankingRoute.js";
 dotenv.config();
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(getUrlShortenRoute);
 app.use(openShortUrl);
 app.use(deleteShortUrlRoute);
 app.use(getUsersMeRoute);
+app.use(getRankingRoute);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Running on port: ${port}`));
