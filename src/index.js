@@ -6,6 +6,7 @@ import { signInRoute } from "./routes/signInRoute.js";
 import { postUrlShortenRoute } from "./routes/postUrlShortenRoute.js";
 import { getUrlShortenRoute } from "./routes/getUrlShortenRoute.js";
 import { openShortUrl } from "./routes/openShortUrlRoute.js";
+import { deleteShortUrlRoute } from "./routes/deleteShortUrlRoute.js";
 dotenv.config();
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(signInRoute);
 app.use(postUrlShortenRoute);
 app.use(getUrlShortenRoute);
 app.use(openShortUrl);
+app.use(deleteShortUrlRoute);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Running on port: ${port}`));
