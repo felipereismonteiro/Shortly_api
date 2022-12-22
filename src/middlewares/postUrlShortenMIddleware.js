@@ -6,11 +6,12 @@ export default async function postUrlShortenMiddleware(req, res, next) {
   try {
     const header = req.headers.authorization;
     const body = req.body;
-    const token = header.replace("Bearer ", "");
+    
 
     if (header === undefined || header.split(" ")[0] !== "Bearer") {
       return res.sendStatus(401);
     }
+    const token = header.replace("Bearer ", "");
 
     const { url } = await postUrlShortenSchema.validateAsync(body, {
       abortEarly: false,
