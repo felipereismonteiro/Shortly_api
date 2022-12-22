@@ -4,7 +4,7 @@ export default async function openShortUrlController(req, res) {
     try {
         const { shortUrl } = req.params;
         const promisse = await connectionDB.query(`SELECT * FROM urls WHERE short_url=$1`, [shortUrl]);
-        console.log(promisse);
+        
         if (promisse.rows.length === 0) {
             return res.sendStatus(404);
         }
