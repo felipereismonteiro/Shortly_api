@@ -5,7 +5,8 @@ export default async function signInController(req, res) {
     const { id_user, token } = req.token;
     await connectionDB.query(`INSERT INTO tokens(id_user, token) VALUES($1, $2)`, [id_user, token]);
     const user = await connectionDB.query(`SELECT users.name FROM users WHERE id=$1`, [id_user]) 
-    res.status(200).send(token, user.rows);
+    
+    res.status(200).send({token, userName: user.rows[0]});
   } catch (err) {
     res.send(err.message);
   }
