@@ -121,6 +121,19 @@
     ]
     
     
-- Limitado a **10 usuários.**
-- Esta lista deve ser **ordenada** pela soma de visitas de seus links.
-- Deve aparecer inclusive usuários cujos *links* não tiveram nenhuma visita, caso necessário.
+## How to run for development
+
+1. Clone this repository
+2. Install all dependencies
+
+```bash
+npm i
+```
+
+3. Create a PostgreSQL database with whatever name you want
+4. Configure the `.env.development` file using the `.env.example`
+
+```bash
+npm run dev
+```
+
