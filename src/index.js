@@ -1,14 +1,14 @@
-import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
-import { signUpRoute } from "./routes/signUpRoute.js";
-import { signInRoute } from "./routes/signInRoute.js";
-import { postUrlShortenRoute } from "./routes/postUrlShortenRoute.js";
-import { getUrlShortenRoute } from "./routes/getUrlShortenRoute.js";
-import { openShortUrl } from "./routes/openShortUrlRoute.js";
+import dotenv from "dotenv";
+import express from "express";
 import { deleteShortUrlRoute } from "./routes/deleteShortUrlRoute.js";
-import { getUsersMeRoute } from "./routes/getUsersMeRoute.js";
 import { getRankingRoute } from "./routes/getRankingRoute.js";
+import { getUrlShortenRoute } from "./routes/getUrlShortenRoute.js";
+import { getUsersMeRoute } from "./routes/getUsersMeRoute.js";
+import { openShortUrl } from "./routes/openShortUrlRoute.js";
+import { postUrlShortenRoute } from "./routes/postUrlShortenRoute.js";
+import { signInRoute } from "./routes/signInRoute.js";
+import { signUpRoute } from "./routes/signUpRoute.js";
 dotenv.config();
 
 const app = express();
@@ -24,5 +24,6 @@ app.use(deleteShortUrlRoute);
 app.use(getUsersMeRoute);
 app.use(getRankingRoute);
 
+// server running
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Running on port: ${port}`));
