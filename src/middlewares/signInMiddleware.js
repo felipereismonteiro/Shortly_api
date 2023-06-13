@@ -1,4 +1,4 @@
-import { connectionDB } from "../database/db.js" 
+import { prisma } from "../database/db.js" 
 import { signInSchema } from "../models/signInSchema.js"
 import bcrypt from "bcrypt";
 import {v4 as uuid} from "uuid"
@@ -9,20 +9,21 @@ export default async function signInMiddleware(req, res, next) {
 
         const { email, password } = await signInSchema.validateAsync(body, {abortEarly: false});
         
-        const foundedEmail = await connectionDB.query(`SELECT * FROM users WHERE email=$1`, [email]);
+        const foundedEmail = await prisma.users.findFirst({
+            where: {
+                email
+            }
+        })
         
-        if (foundedEmail.rows.length === 0) {
-            return res.sendStatus(404);
-        }
+        if (!foundedEmail) return res.sendStatus(404);
 
-        const compared = bcrypt.compareSync(password, foundedEmail.rows[0].password); 
+        const compared = bcrypt.compareSync(password, foundedEmail.password);
 
-        if (compared === false) {
-            return res.sendStatus(401);
-        }
+        if (compared === false) return res.sendStatus(401);
+    
        
         const token = {
-            id_user: foundedEmail.rows[0].id,
+            id_user: foundedEmail.id,
             token: uuid()
         }
         

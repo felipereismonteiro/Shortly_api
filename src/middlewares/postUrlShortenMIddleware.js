@@ -1,6 +1,6 @@
 import { postUrlShortenSchema } from "../models/postUrlShortenSchema.js";
 import { nanoid } from "nanoid";
-import { connectionDB } from "../database/db.js";
+import { prisma } from "../database/db.js";
 
 export default async function postUrlShortenMiddleware(req, res, next) {
   try {
@@ -17,12 +17,18 @@ export default async function postUrlShortenMiddleware(req, res, next) {
       abortEarly: false,
     });
 
-    const user = await connectionDB.query(
-      `SELECT * FROM tokens WHERE token=$1`,
-      [token]
-    );
+    const user = await prisma.tokens.findFirst({
+      where: {
+        token
+      }
+    })
 
-    const urlFounded = await connectionDB.query(`SELECT * FROM urls WHERE user_id=$1 AND url=$2`, [user.rows[0].id_user, url])
+    const urlFounded = await prisma.urls.findFirst({
+      where: {
+        user_id: user.id_user,
+        url
+      }
+    })
 
     if (urlFounded.rows.length !== 0) {
       return res.status(401).send("Url already in use!!!");

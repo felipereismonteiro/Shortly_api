@@ -1,9 +1,13 @@
-import { connectionDB } from "../database/db.js";
+import { prisma } from "../database/db.js";
 
 export default async function deleteShortUrlController(req, res) {
     try {
         const { token, id } = req.deleteOne;
-        await connectionDB.query(`DELETE FROM urls WHERE id=$1`, [id]);
+        await prisma.urls.delete({
+            where: {
+                id
+            }
+        })
         res.sendStatus(204);
     } catch (err) {
         console.log(err);
