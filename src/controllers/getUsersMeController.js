@@ -14,7 +14,9 @@ export default async function(req, res) {
         GROUP BY users.id
         `;
 
-        res.send(promise);
+        const result = JSON.parse(JSON.stringify(promise));
+
+        res.send(result);
     } catch (err) {
         console.log(err);
         res.send(err.message);
