@@ -5,7 +5,7 @@ export default async function deleteShortUrlController(req, res) {
         const { token, id } = req.deleteOne;
         await prisma.urls.delete({
             where: {
-                id
+                id: Number(id)
             }
         })
         res.sendStatus(204);

@@ -5,11 +5,11 @@ export default async function getUrlShortenController(req, res) {
         const { id } = req.params;
         const idUrl = await prisma.urls.findFirstOrThrow({
             where: {
-                id
+                id: Number(id)
             }
         })
 
-        res.send(idUrl.rows);
+        res.send(idUrl);
     } catch(err) {
         console.log(err.message);
         res.status(400).send(err.message);
