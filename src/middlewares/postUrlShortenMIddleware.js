@@ -30,7 +30,7 @@ export default async function postUrlShortenMiddleware(req, res, next) {
       }
     })
 
-    if (urlFounded.rows.length !== 0) {
+    if (urlFounded) {
       return res.status(401).send("Url already in use!!!");
     }
 
