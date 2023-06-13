@@ -35,7 +35,7 @@ export default async function postUrlShortenMiddleware(req, res, next) {
     }
 
     const shortledUrl = {
-      user_id: user.rows[0].id_user,
+      user_id: user.id_user,
       url,
       short_url: nanoid(6),
       visited: 0,

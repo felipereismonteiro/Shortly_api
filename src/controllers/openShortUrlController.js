@@ -13,7 +13,6 @@ export default async function openShortUrlController(req, res) {
 
         let visitedNumber = promise.visited += 1;
 
-        await prisma.query(`UPDATE urls SET visited=$1 WHERE short_url=$2`, [visited += 1, shortUrl])
         await prisma.urls.update({
             data: {
                 short_url: shortUrl,

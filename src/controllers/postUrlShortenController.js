@@ -4,10 +4,6 @@ export default async function postUrlShortenController(req, res) {
   try {
     const { user_id, url, short_url, visited } = req.shortled;
 
-    await prisma.query(
-      `INSERT INTO urls(user_id, url, short_url, visited) VALUES($1, $2, $3, $4)`,
-      [user_id, url, short_url, visited]
-    );
     await prisma.urls.create({
       data: {
         user_id,

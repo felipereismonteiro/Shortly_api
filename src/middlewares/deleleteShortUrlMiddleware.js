@@ -17,10 +17,10 @@ export default async function deleteShortUrlMiddleware(req, res, next) {
             }
         })
 
-        const user = await prisma.$queryRaw(`
+        const user = await prisma.$queryRaw`
         SELECT tokens.id_user, urls.user_id
         FROM tokens, urls
-        WHERE tokens.token=$1 AND urls.id=$2`, [token, id]);
+        WHERE tokens.token=${token} AND urls.id=${id}`;
 
 
         if (user.id_user !== user.user_id) return res.sendStatus(401);
